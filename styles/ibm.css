@@ -1,0 +1,76 @@
+/* for IBM questions */
+#ibmStartQuestions {
+    height: 75vh;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  
+  #thisOrThat {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  #options {
+    width: 90%;
+    text-align: justify;
+  }
+  
+  #options p {
+    padding: 3px;
+    border-radius: 3px;
+  }
+  
+  #options p:hover {
+    cursor: pointer;
+  }
+  
+  #options p:nth-child(2):hover {
+    pointer-events: none;
+    background: none;
+    cursor: auto;
+  }
+  
+  /* for color-changing border */
+  @keyframes color-change {
+    0% {
+      border-color: orange;
+      color: orange;
+    }
+    33% {
+      border-color: yellow;
+      color: yellow;
+    }
+    66% {
+      border-color: green;
+      color: green;
+    }
+    100% {
+      border-color: orange;
+      color: orange;
+    }
+  }
+  
+  .color-changing-border {
+    border: 5px solid;
+    border-color: transparent;
+    animation: color-change 5s linear infinite;
+  }
+  
+  #subjectToChooseFrom {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  #subjectToChooseFrom p {
+    padding: 4px;
+    color: gray;
+    border-radius: 10px;
+    border: 4px solid gray;
+  }

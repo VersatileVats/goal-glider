@@ -1,0 +1,437 @@
+@font-face {
+  font-family: "ITIM";
+  src: url("../fonts/itim.ttf") format("truetype");
+  font-style: normal;
+}
+
+* {
+  font-family: "Itim", serif;
+  user-select: none;
+}
+
+
+#selectMusic, #musicOptions {
+  display: none !important;
+}
+
+#timer {
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* css styles for the bitbucketGame */
+:root {
+  /* default values for (difficulty = easy) game: 70vw for 5 items and for 3 items: 40vw */
+  --gridSize: 3;
+  --width: 40vw;
+  --bitCardDimensions: 140px;
+  overflow: hidden;
+}
+
+body {
+  background: white
+}
+
+/* style for landing section */
+.container {
+  max-width: 1280px;
+  padding: 0 1.5rem;
+  margin: auto;
+  overflow: hidden;
+}
+
+.btn-light {
+  display: inline-block;
+  padding: 5px;
+  transition: all 0.5s;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.name {
+  color: #ffbc00;
+}
+
+button[class^="btn-"]:hover,
+a[class^="btn-"]:hover,
+input[class^="btn-"]:hover {
+  background-color: #ffbc00;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+#tutorial, #landing-section {
+  background: url("../img/landing.jpg") no-repeat center left/cover;
+  position: absolute;
+  height: 100vh;
+  color: #fff;
+  left: 0;
+  top: 0;
+}
+
+#landing-section img {
+  filter: grayscale(100%);
+}
+
+#full-form {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: underline dashed
+}
+
+#reasoning {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 4px
+}
+
+#full-form,
+#reasoning {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/*for sound notification*/
+.notification {
+  opacity: 0;
+  left: 10px;
+  padding: 15px;
+  color: white;
+  bottom: -100px;
+  position: fixed;
+  border-radius: 5px;
+  background-color: #4caf50;
+  transition: bottom 0.5s ease, opacity 0.5s ease;
+}
+
+.notification.show {
+  bottom: 10px;
+  opacity: 1;
+}
+
+.notification.hide {
+  bottom: -100px;
+  opacity: 0;
+}
+
+
+#tutorial::before, #landing-section::before {
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+#tutorial *, #landing-section * {
+  z-index: 1;
+}
+
+#gameContainer {
+  width: 55vw;
+  margin: auto;
+}
+
+#bitbucketGameDiv {
+  gap: 10px;
+  height: 80vh;
+  margin: auto;
+  display: grid;
+  width: var(--width);
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(var(--gridSize), 1fr);
+}
+
+.bitCard {
+  background-color: transparent;
+  width: var(--bitCardDimensions);
+  height: var(--bitCardDimensions);
+  margin: 7px auto;
+}
+
+.bit-card-inner {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  border-radius: 5px;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.bit-card-inner:hover {
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+}
+
+.bit-card-front,
+.bit-card-back {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  color: white;
+  flex-wrap: nowrap;
+  position: absolute;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+  white-space: normal; 
+  /* hyphens: auto */
+}
+
+.bit-card-front {
+  border-radius: 5px;
+}
+
+.bit-card-front img {
+  border-radius: 5px;
+  width: var(--bitCardDimensions);
+  height: var(--bitCardDimensions);
+}
+
+.bit-card-back {
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.bit-card-back img {
+  border-radius: 5px;
+  width: var(--bitCardDimensions);
+  height: var(--bitCardDimensions);
+}
+
+.modal {
+  gap: 0.4rem;
+  z-index: 1000;
+  width: 480px;
+  display: flex;
+  padding: 1.3rem;
+  position: absolute;
+  border-radius: 15px;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #ddd;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal input {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.modal p {
+  font-size: 0.9rem;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.btn {
+  color: white;
+  font-size: 1em;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  background-color: black;
+}
+
+.btn-close {
+  width: 50%;
+  border-radius: 10px;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* controller */
+.joystick-container {
+  left: 5px;
+  width: 80px;
+  z-index: 100;
+  height: 80px;
+  bottom: 0%;
+  display: none;
+  cursor: pointer;
+  touch-action: none;
+  /* position: absolute; */
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(220, 220, 220, 0.7);
+}
+
+.joystick {
+  width: 30px;
+  height: 30px;
+  background: rgba(76, 215, 26, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  transition: all 0.1s ease-out;
+}
+
+#video {
+  overflow: scroll;
+  overflow-x: hidden
+}
+
+#video::-webkit-scrollbar {
+  width: 0px; 
+}
+
+#video::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+#tutorial #para {
+  text-align: justify;
+  line-height: 2rem;
+  border-radius: 10px;
+}
+
+/* for smaller devices */
+@media (max-width: 1200px) { 
+  .bit-card-back > * , .bit-card-front  > * {
+    font-size: 1rem;
+  }
+
+  #imageDiv {
+    display: none;
+  }
+
+  #videoPlayground {
+    width: 90vw;
+  }
+
+  /* to grab the parent div */
+  #qaDiv {
+    flex-direction: row;
+  }
+
+  #videoQuestions {
+    border-radius: 20px 0px 0px 20px
+  }
+
+  #video {
+    border-radius: 0px 20px 20px 0px
+  }
+
+  #tutorial h2 {
+    display: none;
+  }
+
+  #tutorial #para {
+    font-size: 1rem;
+    width: 60%;
+  }
+}
+
+/* for large screen devices */
+@media (min-width: 1200px) { 
+  .bit-card-back > *, .bit-card-front  > * {
+    font-size: 1.3rem;
+  }
+
+  #imageDiv {
+    display: block;
+  }
+
+  #videoPlayground {
+    width: 60vw;
+  }
+
+  #qaDiv {
+    flex-direction: column;
+  }
+
+  #videoQuestions {
+    border-radius: 20px 20px 0 0
+  }  
+
+  #video {
+    border-radius: 0 0 20px 20px
+  }
+
+  #tutorial h2 {
+    display: block;
+  }
+
+  #tutorial #para {
+    font-size: 1.3rem;
+    width: 50%;
+  }
+}
+
+/* for the directions in maze game */
+@keyframes pushPull {
+  0%, 100% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+.directions-bounce {
+  animation: pushPull 0.5s ease-in-out infinite;
+}

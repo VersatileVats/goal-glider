@@ -1,0 +1,35 @@
+#main-text {
+    display: none;
+}
+
+#letters {
+    text-align: center;
+}
+
+#landing-section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#landing-section img {
+    filter: grayscale(100%);
+}
+
+#full-form {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+#full-form {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in and fade-out */
+}
+
+.accordion-button:hover {
+    color: white;
+}
